@@ -7,9 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary Meta Tags -->
-  <title>DNA Auto | Seja uma Oficina Parceira Credenciada</title>
-  <meta name="title" content="DNA Auto | Seja uma Oficina Parceira Credenciada">
-  <meta name="description" content="Credenciamento exclusivo de oficinas e auto centers no Rio de Janeiro. Operação inicia em 45 dias. Garanta sua vaga com taxa pioneira de R$ 299 antes do reajuste para R$ 899.">
+  <title>DNA Auto | Credenciamento Oficial de Oficinas Parceiras no RJ</title>
+  <meta name="title" content="DNA Auto | Credenciamento Oficial de Oficinas Parceiras no RJ">
+  <meta name="description" content="Credenciamento exclusivo de oficinas mecânicas e auto centers no Rio de Janeiro. Operação inicia em 45 dias. Garanta exclusividade territorial, faturamento recorrente e agendamento automático de manutenções.">
+  <meta name="keywords" content="oficina mecânica, auto center, credenciamento oficinas RJ, DNA Auto, manutenção preventiva, histórico veicular digital, troca de óleo, oficina parceira">
+  <meta name="author" content="DNA Auto Tecnologia Automotiva">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ff4605">
+  <link rel="canonical" href="https://leopalmeira.github.io/dna-auto-captacao-parceiros/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leopalmeira.github.io/dna-auto-captacao-parceiros/">
+  <meta property="og:title" content="DNA Auto | Credenciamento Oficial de Oficinas Parceiras no RJ">
+  <meta property="og:description" content="Aumente o faturamento da sua oficina com previsão ativa de revisões e histórico digital permanente. Operação inicia em 45 dias no Rio de Janeiro.">
+  <meta property="og:image" content="https://leopalmeira.github.io/dna-auto-captacao-parceiros/assets/images/hero-banner.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="DNA Auto">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://leopalmeira.github.io/dna-auto-captacao-parceiros/">
+  <meta property="twitter:title" content="DNA Auto | Credenciamento Oficial de Oficinas Parceiras no RJ">
+  <meta property="twitter:description" content="Credenciamento pioneiro de oficinas mecânicas e auto centers no Rio de Janeiro. Vagas restritas a 70-80 estabelecimentos.">
+  <meta property="twitter:image" content="https://leopalmeira.github.io/dna-auto-captacao-parceiros/assets/images/hero-banner.png">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
@@ -30,6 +51,34 @@
   <!-- Preload Images -->
   <link rel="preload" as="image" href="./assets/images/hero-banner.png">
   <link rel="preload" as="image" href="./assets/images/hero-bg.jpg">
+
+  <!-- Structured Data (Schema.org) for Automotive Business & Local SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutomotiveBusiness",
+    "name": "DNA Auto - Rede de Oficinas Credenciadas RJ",
+    "image": "https://leopalmeira.github.io/dna-auto-captacao-parceiros/assets/images/hero-banner.png",
+    "description": "Credenciamento oficial de oficinas mecânicas e auto centers no Rio de Janeiro com previsão ativa de revisões e histórico digital permanente.",
+    "url": "https://leopalmeira.github.io/dna-auto-captacao-parceiros/",
+    "priceRange": "R$ 299,00",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Rio de Janeiro",
+      "addressRegion": "RJ",
+      "addressCountry": "BR"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": "Rio de Janeiro"
+    },
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": "https://leopalmeira.github.io/dna-auto-captacao-parceiros/#cadastro",
+      "name": "Credenciar Oficina"
+    }
+  }
+  </script>
 </head>
 
 <body>
@@ -38,18 +87,18 @@
   <header class="header">
     <div class="container">
 
-      <a href="#" class="logo" style="display: flex; align-items: center; gap: 6px; text-decoration: none;">
+      <a href="#home" class="logo" style="display: flex; align-items: center; gap: 6px; text-decoration: none;" aria-label="DNA Auto - Início">
         <span style="font-family: var(--ff-chakra-petch); font-weight: 700; font-size: 2.8rem; color: var(--white); letter-spacing: 1px;">DNA</span>
         <span style="font-family: var(--ff-chakra-petch); font-weight: 700; font-size: 2.8rem; color: var(--international-orange-engineering); letter-spacing: 1px;">AUTO</span>
       </a>
 
-      <nav class="navbar" data-navbar>
+      <nav class="navbar" data-navbar aria-label="Navegação principal">
         <ul class="navbar-list">
           <li><a href="#home" class="navbar-link">Início</a></li>
-          <li><a href="#services" class="navbar-link">Como Lucrar</a></li>
-          <li><a href="#about" class="navbar-link">Sobre</a></li>
-          <li><a href="#work" class="navbar-link">Revisões</a></li>
-          <li><a href="#cadastro" class="navbar-link" data-open-modal>Credenciamento</a></li>
+          <li><a href="#services" class="navbar-link">Como a Oficina Lucra</a></li>
+          <li><a href="#about" class="navbar-link">Sobre o Credenciamento</a></li>
+          <li><a href="#work" class="navbar-link">Revisões Críticas</a></li>
+          <li><a href="#cadastro" class="navbar-link" data-open-modal>Termo de Adesão</a></li>
           <li><a href="admin.html" class="navbar-link" style="opacity: 0.7;">Painel Admin</a></li>
         </ul>
       </nav>
@@ -59,7 +108,7 @@
         <span class="material-symbols-rounded">arrow_forward</span>
       </a>
 
-      <button class="nav-toggle-btn" aria-label="toggle menu" data-nav-toggler>
+      <button class="nav-toggle-btn" aria-label="Abrir menu de navegação" data-nav-toggler>
         <span class="nav-toggle-icon icon-1"></span>
         <span class="nav-toggle-icon icon-2"></span>
         <span class="nav-toggle-icon icon-3"></span>
@@ -71,22 +120,22 @@
   <main>
     <article>
 
-      <!-- #HERO (Anti-Slop Clean & Direct) -->
-      <section class="hero has-bg-image" id="home" aria-label="home" style="background-image: url('./assets/images/hero-bg.jpg')">
+      <!-- #HERO (Redação Persuasiva, Foco em Conversão & Anti-Slop) -->
+      <section class="hero has-bg-image" id="home" aria-label="Página Inicial" style="background-image: url('./assets/images/hero-bg.jpg')">
         <div class="container">
 
           <div class="hero-content">
-            <p class="section-subtitle :dark">FASE DE CREDENCIAMENTO • RIO DE JANEIRO</p>
+            <p class="section-subtitle :dark">EXPANSÃO RIO DE JANEIRO • CREDENCIAMENTO EXCLUSIVO</p>
 
             <h1 class="h1 section-title">SUA OFICINA CONECTADA AO FUTURO DA MANUTENÇÃO AUTOMOTIVA</h1>
 
             <p class="section-text">
-              A plataforma inicia suas operações em 45 dias. Garanta o credenciamento prévio da sua oficina e atenda a base de motoristas no Rio de Janeiro.
+              Transforme clientes eventuais em atendimentos programados. Em 45 dias, o DNA Auto conecta os proprietários de veículos do Rio de Janeiro às oficinas credenciadas com lembretes automáticos de revisão e histórico vitalício.
             </p>
 
             <div class="hero-cta-wrap">
               <a href="#cadastro" class="btn btn-primary" data-open-modal>
-                <span class="span">Quero ser um Parceiro</span>
+                <span class="span">Quero Credenciar Minha Oficina</span>
                 <span class="material-symbols-rounded">arrow_forward</span>
               </a>
 
@@ -98,13 +147,13 @@
           </div>
 
           <figure class="hero-banner" style="--width: 1228; --height: 789;">
-            <img src="./assets/images/hero-banner.png" width="1228" height="789" alt="veículo esportivo" class="move-anim">
+            <img src="./assets/images/hero-banner.png" width="1228" height="789" alt="Veículo esportivo moderno na oficina credenciada DNA Auto" class="move-anim">
           </figure>
 
         </div>
       </section>
 
-      <!-- #METRICS STRIP (Ticker de Métricas e Escassez sob o Hero) -->
+      <!-- #METRICS STRIP (Ticker de Autoridade, Prazos e Escassez) -->
       <section class="metrics-strip" aria-label="Destaques do Credenciamento">
         <div class="container">
           <div class="metrics-grid">
@@ -123,8 +172,8 @@
                 <span class="material-symbols-rounded">verified</span>
               </div>
               <div class="metric-content">
-                <strong>Apenas 70 a 80 Oficinas</strong>
-                <span>Vagas limitadas para exclusividade</span>
+                <strong>Apenas 70 a 80 Vagas</strong>
+                <span>Exclusividade territorial para parceiros pioneiros</span>
               </div>
             </div>
 
@@ -134,21 +183,21 @@
               </div>
               <div class="metric-content">
                 <strong>Adesão: R$ 299,00</strong>
-                <span>Taxa única nos 30 dias (depois R$ 899)</span>
+                <span>Taxa única nos primeiros 30 dias (depois R$ 899)</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- #SERVICE (COMO A OFICINA LUCRA) -->
+      <!-- #SERVICE (MODELO DE FATURAMENTO DA OFICINA) -->
       <section class="section service has-bg-image" id="services" aria-labelledby="service-label"
         style="background-image: url('./assets/images/service-bg.jpg')">
         <div class="container" id="como-funciona">
 
-          <p class="section-subtitle :light" id="service-label">Modelo Comercial</p>
+          <p class="section-subtitle :light" id="service-label">Modelo Comercial de Alta Retenção</p>
 
-          <h2 class="h2 section-title">Como sua Oficina Aumenta o Faturamento</h2>
+          <h2 class="h2 section-title">Como o DNA Auto Alavanca o Faturamento da sua Oficina</h2>
 
           <ul class="service-list">
 
@@ -156,11 +205,11 @@
             <li>
               <div class="service-card">
                 <figure class="card-icon">
-                  <img src="./assets/images/services-1.png" width="110" height="110" loading="lazy" alt="Previsão de Revisões">
+                  <img src="./assets/images/services-1.png" width="110" height="110" loading="lazy" alt="Previsão Ativa de Revisões">
                 </figure>
                 <h3 class="h3 card-title">Previsão Ativa de Revisões</h3>
                 <p class="card-text">
-                  Acompanhe prazos e km de troca de óleo, correia dentada, freios e filtros. Avise o cliente na hora exata em que ele precisa voltar.
+                  A maioria dos clientes não lembra quando trocar óleo, correia ou freios. O sistema calcula os prazos e avisa sua oficina para agendar o retorno do veículo no momento certo.
                 </p>
                 <a href="#cadastro" class="btn-link" data-open-modal>Credenciar Oficina</a>
               </div>
@@ -170,11 +219,11 @@
             <li>
               <div class="service-card">
                 <figure class="card-icon">
-                  <img src="./assets/images/services-2.png" width="110" height="110" loading="lazy" alt="Lucro sobre Taxa">
+                  <img src="./assets/images/services-2.png" width="110" height="110" loading="lazy" alt="Comissão por Veículo">
                 </figure>
                 <h3 class="h3 card-title">Comissão por Veículo</h3>
                 <p class="card-text">
-                  O motorista paga taxa única de R$ 59,90 pelo histórico vitalício, e sua oficina recebe participação direta no lucro de cada cadastro.
+                  O proprietário paga taxa única de R$ 59,90 pelo histórico vitalício, e sua oficina recebe uma comissão imediata sobre cada veículo cadastrado na plataforma.
                 </p>
                 <a href="#cadastro" class="btn-link" data-open-modal>Credenciar Oficina</a>
               </div>
@@ -184,11 +233,11 @@
             <li>
               <div class="service-card">
                 <figure class="card-icon">
-                  <img src="./assets/images/services-3.png" width="110" height="110" loading="lazy" alt="Indicação Prioritária">
+                  <img src="./assets/images/services-3.png" width="110" height="110" loading="lazy" alt="Indicação Prioritária no App">
                 </figure>
-                <h3 class="h3 card-title">Indicação Prioritária no App</h3>
+                <h3 class="h3 card-title">Indicação Preferencial no App</h3>
                 <p class="card-text">
-                  O veículo cadastrado na sua oficina tem seu estabelecimento como primeira opção recomendada quando precisar de manutenção.
+                  O veículo que você cadastrar terá sua oficina como primeira recomendação no aplicativo sempre que precisar de manutenção. Fidelização garantida no seu box.
                 </p>
                 <a href="#cadastro" class="btn-link" data-open-modal>Credenciar Oficina</a>
               </div>
@@ -200,9 +249,9 @@
                 <figure class="card-icon">
                   <img src="./assets/images/services-4.png" width="110" height="110" loading="lazy" alt="Histórico com Fotos">
                 </figure>
-                <h3 class="h3 card-title">Histórico com Fotos</h3>
+                <h3 class="h3 card-title">Comprovação com Fotos e NFs</h3>
                 <p class="card-text">
-                  Documente peças substituídas, fotografias e notas fiscais. O cliente consulta no app e reconhece o valor do seu trabalho técnico.
+                  Documente peças aplicadas, notas fiscais e fotos do serviço. O cliente ganha transparência incontestável e reconhece o valor técnico da sua mão de obra.
                 </p>
                 <a href="#cadastro" class="btn-link" data-open-modal>Credenciar Oficina</a>
               </div>
@@ -218,11 +267,11 @@
             <li>
               <div class="service-card">
                 <figure class="card-icon">
-                  <img src="./assets/images/services-6.png" width="110" height="110" loading="lazy" alt="Rede Exclusiva RJ">
+                  <img src="./assets/images/services-6.png" width="110" height="110" loading="lazy" alt="Exclusividade Regional RJ">
                 </figure>
-                <h3 class="h3 card-title">Exclusividade Territorial</h3>
+                <h3 class="h3 card-title">Exclusividade Regional RJ</h3>
                 <p class="card-text">
-                  Limite estrito de 70 a 80 parceiros no Rio de Janeiro para garantir exclusividade e alto volume de atendimentos a cada oficina.
+                  Apenas 70 a 80 oficinas selecionadas em todo o estado do Rio de Janeiro. Uma rede enxuta desenhada para direcionar alto volume de fluxo para cada parceiro credenciado.
                 </p>
                 <a href="#cadastro" class="btn-link" data-open-modal>Credenciar Oficina</a>
               </div>
@@ -231,46 +280,46 @@
           </ul>
 
           <a href="#cadastro" class="btn" data-open-modal>
-            <span class="span">Quero Fazer Parte da Rede</span>
+            <span class="span">Quero Fazer Parte da Rede Pioneira</span>
             <span class="material-symbols-rounded">arrow_forward</span>
           </a>
 
         </div>
       </section>
 
-      <!-- #ABOUT (SOBRE O CREDENCIAMENTO) -->
+      <!-- #ABOUT (CREDENCIAMENTO PIONEIRO) -->
       <section class="section about has-before" id="about" aria-labelledby="about-label">
         <div class="container" id="programa">
 
           <figure class="about-banner">
             <img src="./assets/images/about-banner.png" width="540" height="540" loading="lazy"
-              alt="Oficina mecânica credenciada" class="w-100">
+              alt="Centro automotivo credenciado DNA Auto" class="w-100">
           </figure>
 
           <div class="about-content">
-            <p class="section-subtitle :dark">Fase de Expansão RJ</p>
+            <p class="section-subtitle :dark">Uma Oportunidade Única</p>
 
             <h2 class="h2 section-title">Credenciamento Aberto por Tempo Limitado</h2>
 
             <p class="section-text">
-              Estamos estruturando a rede de oficinas mecânicas e centros automotivos credenciados antes do lançamento oficial do aplicativo aos motoristas, previsto para <strong>45 dias</strong>.
+              A maioria das oficinas sofre com a inconstância: fazem um serviço impecável, entregam o veículo e nunca mais sabem quando o cliente retornará. O DNA Auto transforma essa relação em previsibilidade comercial.
             </p>
 
             <p class="section-text">
-              Para assegurar alta rentabilidade a cada parceiro, limitamos as vagas a <strong>70 a 80 oficinas</strong> no Rio de Janeiro. Durante esta janela de 30 dias, a taxa de adesão pioneira é de <strong>R$ 299,00</strong> (com reajuste previsto para <strong>R$ 899,00</strong> após este período).
+              Ao estruturar a rede <strong>45 dias antes do lançamento</strong> oficial do aplicativo aos motoristas, posicionamos sua oficina como referência local. Com a taxa pioneira de <strong>R$ 299,00</strong> na janela de 30 dias, você garante seu credenciamento antes do reajuste para <strong>R$ 899,00</strong>.
             </p>
 
             <ul class="about-list">
 
               <li class="about-item">
                 <p>
-                  <strong class="display-1 strong">45d</strong> Lançamento no RJ
+                  <strong class="display-1 strong">45d</strong> Lançamento Oficial RJ
                 </p>
               </li>
 
               <li class="about-item">
                 <p>
-                  <strong class="display-1 strong">70-80</strong> Oficinas Credenciadas
+                  <strong class="display-1 strong">70-80</strong> Vagas Credenciadas
                 </p>
               </li>
 
@@ -296,22 +345,22 @@
       <section class="section work" id="work" aria-labelledby="work-label">
         <div class="container">
 
-          <p class="section-subtitle :light" id="work-label">Histórico na Prática</p>
+          <p class="section-subtitle :light" id="work-label">Oportunidades de Alto Retorno</p>
 
-          <h2 class="h2 section-title">Serviços que Fazem o Motorista Retornar</h2>
+          <h2 class="h2 section-title">Revisões que Fazem o Motorista Retornar à sua Oficina</h2>
 
           <ul class="has-scrollbar">
 
             <li class="scrollbar-item">
               <div class="work-card">
                 <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
-                  <img src="./assets/images/work-1.jpg" width="350" height="406" loading="lazy" alt="Troca de Óleo e Filtros"
+                  <img src="./assets/images/work-1.jpg" width="350" height="406" loading="lazy" alt="Troca de Óleo e Filtros periódica"
                     class="img-cover">
                 </figure>
                 <div class="card-content">
-                  <p class="card-subtitle">Retorno Frequente</p>
+                  <p class="card-subtitle">Recorrência Periódica</p>
                   <h3 class="h3 card-title">Troca de Óleo e Filtros</h3>
-                  <a href="#cadastro" class="card-btn" data-open-modal>
+                  <a href="#cadastro" class="card-btn" data-open-modal aria-label="Credenciar para troca de óleo">
                     <span class="material-symbols-rounded">arrow_forward</span>
                   </a>
                 </div>
@@ -321,13 +370,13 @@
             <li class="scrollbar-item">
               <div class="work-card">
                 <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
-                  <img src="./assets/images/work-2.jpg" width="350" height="406" loading="lazy" alt="Correia Dentada e Freios"
+                  <img src="./assets/images/work-2.jpg" width="350" height="406" loading="lazy" alt="Correia Dentada e Sistema de Freios"
                     class="img-cover">
                 </figure>
                 <div class="card-content">
                   <p class="card-subtitle">Segurança Crítica</p>
                   <h3 class="h3 card-title">Correia Dentada e Freios</h3>
-                  <a href="#cadastro" class="card-btn" data-open-modal>
+                  <a href="#cadastro" class="card-btn" data-open-modal aria-label="Credenciar para correia e freios">
                     <span class="material-symbols-rounded">arrow_forward</span>
                   </a>
                 </div>
@@ -337,13 +386,13 @@
             <li class="scrollbar-item">
               <div class="work-card">
                 <figure class="card-banner img-holder" style="--width: 350; --height: 406;">
-                  <img src="./assets/images/work-3.jpg" width="350" height="406" loading="lazy" alt="Óleo de Câmbio e Bateria"
+                  <img src="./assets/images/work-3.jpg" width="350" height="406" loading="lazy" alt="Óleo de Câmbio Automático e Bateria"
                     class="img-cover">
                 </figure>
                 <div class="card-content">
-                  <p class="card-subtitle">Alto Valor Técnico</p>
+                  <p class="card-subtitle">Alto Ticket Técnico</p>
                   <h3 class="h3 card-title">Óleo de Câmbio e Bateria</h3>
-                  <a href="#cadastro" class="card-btn" data-open-modal>
+                  <a href="#cadastro" class="card-btn" data-open-modal aria-label="Credenciar para câmbio e elétrica">
                     <span class="material-symbols-rounded">arrow_forward</span>
                   </a>
                 </div>
@@ -365,17 +414,17 @@
       <div class="container">
 
         <div class="footer-brand">
-          <a href="#" class="logo" style="display: flex; align-items: center; gap: 6px; text-decoration: none;">
+          <a href="#home" class="logo" style="display: flex; align-items: center; gap: 6px; text-decoration: none;" aria-label="DNA Auto - Início">
             <span style="font-family: var(--ff-chakra-petch); font-weight: 700; font-size: 2.8rem; color: var(--white); letter-spacing: 1px;">DNA</span>
             <span style="font-family: var(--ff-chakra-petch); font-weight: 700; font-size: 2.8rem; color: var(--international-orange-engineering); letter-spacing: 1px;">AUTO</span>
           </a>
           <p class="footer-text">
-            Conectando oficinas mecânicas e auto centers aos proprietários de veículos por meio do histórico digital de manutenção no Rio de Janeiro.
+            Conectando oficinas mecânicas e auto centers aos proprietários de veículos por meio do histórico digital permanente de manutenção no Rio de Janeiro.
           </p>
           <ul class="social-list">
-            <li><a href="#" class="social-link"><img src="./assets/images/facebook.svg" alt="facebook"></a></li>
-            <li><a href="#" class="social-link"><img src="./assets/images/instagram.svg" alt="instagram"></a></li>
-            <li><a href="#" class="social-link"><img src="./assets/images/twitter.svg" alt="twitter"></a></li>
+            <li><a href="#" class="social-link" aria-label="Facebook do DNA Auto"><img src="./assets/images/facebook.svg" alt="facebook"></a></li>
+            <li><a href="#" class="social-link" aria-label="Instagram do DNA Auto"><img src="./assets/images/instagram.svg" alt="instagram"></a></li>
+            <li><a href="#" class="social-link" aria-label="Twitter do DNA Auto"><img src="./assets/images/twitter.svg" alt="twitter"></a></li>
           </ul>
         </div>
 
@@ -385,33 +434,33 @@
           <li><a href="#services" class="footer-link">Como a Oficina Lucra</a></li>
           <li><a href="#about" class="footer-link">Sobre o Credenciamento</a></li>
           <li><a href="#work" class="footer-link">Histórico na Prática</a></li>
-          <li><a href="#cadastro" class="footer-link" data-open-modal>Pré-Cadastro de Parceiros</a></li>
+          <li><a href="#cadastro" class="footer-link" data-open-modal>Termo de Adesão</a></li>
           <li><a href="admin.html" class="footer-link" style="color: var(--international-orange-engineering);">Painel Administrativo</a></li>
         </ul>
 
         <ul class="footer-list" id="faq">
           <li><p class="h3">Dúvidas Frequentes</p></li>
           <li><p class="p">Quando inicia a operação?</p><span class="span">Em 45 dias no Rio de Janeiro</span></li>
-          <li><p class="p">Qual o valor de adesão?</p><span class="span">R$ 299 nos 30 dias (depois R$ 899)</span></li>
+          <li><p class="p">Qual o valor de adesão?</p><span class="span">R$ 299 nos primeiros 30 dias (depois R$ 899)</span></li>
           <li><p class="p">Quantas oficinas credenciadas?</p><span class="span">Limite de 70 a 80 parceiros no RJ</span></li>
-          <li><p class="p">Quanto o cliente paga?</p><span class="span">Taxa única de R$ 59,90 (com comissão)</span></li>
+          <li><p class="p">Quanto o cliente paga?</p><span class="span">Taxa única de R$ 59,90 (com repasse de lucro)</span></li>
           <li><p class="p">Faz diagnóstico OBD?</p><span class="span">Não, foco em histórico e agendamento</span></li>
           <li><a href="politica-privacidade.html" class="footer-link" style="margin-top: 8px;">Política de Privacidade (LGPD)</a></li>
         </ul>
 
       </div>
 
-      <img src="./assets/images/footer-shape-3.png" width="637" height="173" loading="lazy" alt="Shape"
+      <img src="./assets/images/footer-shape-3.png" width="637" height="173" loading="lazy" alt="Linha decorativa automotiva"
         class="shape shape-3 move-anim">
 
     </div>
 
     <div class="footer-bottom">
       <div class="container">
-        <p class="copyright">Copyright 2026, DNA Auto. Todos os direitos reservados. Expansão RJ.</p>
-        <img src="./assets/images/footer-shape-2.png" width="778" height="335" loading="lazy" alt="Shape"
+        <p class="copyright">Copyright 2026, DNA Auto. Todos os direitos reservados. Expansão Rio de Janeiro.</p>
+        <img src="./assets/images/footer-shape-2.png" width="778" height="335" loading="lazy" alt="Shape geométrico"
           class="shape shape-2">
-        <img src="./assets/images/footer-shape-1.png" width="805" height="652" loading="lazy" alt="Red Car"
+        <img src="./assets/images/footer-shape-1.png" width="805" height="652" loading="lazy" alt="Silhueta automotiva"
           class="shape shape-1 move-anim">
       </div>
     </div>
@@ -427,7 +476,7 @@
         <div class="modal-header-clean">
           <h2 class="modal-title" id="modalTitle">Credenciamento de Oficina Parceira</h2>
           <p class="modal-subtitle">
-            Preencha os dados e assine digitalmente o termo. Sua solicitação será encaminhada para aprovação no Painel Administrativo.
+            Preencha seus dados e assine digitalmente o termo. Sua solicitação será encaminhada para aprovação no Painel Administrativo.
           </p>
           <div class="modal-price-pill">
             <span class="price-tag">Taxa Pioneira: R$ 299,00</span>
@@ -441,7 +490,7 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="nome_responsavel">Responsável Legal *</label>
-              <input type="text" id="nome_responsavel" name="nome_responsavel" class="form-control" placeholder="Nome completo" required>
+              <input type="text" id="nome_responsavel" name="nome_responsavel" class="form-control" placeholder="Nome completo do responsável" required>
             </div>
 
             <div class="form-group">
@@ -455,7 +504,7 @@
             </div>
 
             <div class="form-group">
-              <label for="whatsapp">WhatsApp Comercial *</label>
+              <label for="whatsapp">WhatsApp Comercial com DDD *</label>
               <input type="tel" id="whatsapp" name="whatsapp" class="form-control" placeholder="(21) 99999-9999" maxlength="15" required>
             </div>
 
@@ -465,12 +514,12 @@
             </div>
 
             <div class="form-group">
-              <label for="bairro">Bairro *</label>
+              <label for="bairro">Bairro da Oficina *</label>
               <input type="text" id="bairro" name="bairro" class="form-control" placeholder="Ex: Barra da Tijuca" required>
             </div>
 
             <div class="form-group form-group-full">
-              <label for="tipo_estabelecimento">Tipo de Estabelecimento *</label>
+              <label for="tipo_estabelecimento">Tipo de Estabelecimento Automotivo *</label>
               <select id="tipo_estabelecimento" name="tipo_estabelecimento" class="form-control" required>
                 <option value="">Selecione uma opção</option>
                 <option value="Oficina mecânica">Oficina mecânica</option>
@@ -511,7 +560,7 @@
 
             <!-- Assinatura Eletrônica -->
             <div class="form-group form-group-full">
-              <label for="assinatura_digital">Assinatura Eletrônica do Responsável *</label>
+              <label for="assinatura_digital">Assinatura Eletrônica do Responsável Legal *</label>
               <input type="text" id="assinatura_digital" name="assinatura_digital" class="form-control" placeholder="Digite seu nome completo para assinar eletronicamente" required>
             </div>
 

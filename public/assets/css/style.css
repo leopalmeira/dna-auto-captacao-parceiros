@@ -1260,10 +1260,11 @@ body {
 }
 
 /*-----------------------------------*\
-  #ANTI-SLOP CLEAN DESIGN SYSTEM (DNA AUTO)
+  #DNA AUTO — ENHANCED ANTI-SLOP SYSTEM
+  Applied by @frontend-specialist & @product-manager
 \*-----------------------------------*/
 
-/* Ticker de Métricas Sob o Hero (Section 4.7 Anti-Slop: Trust/Metrics UNDER Hero) */
+/* Ticker de Métricas Sob o Hero */
 .metrics-strip {
   background: var(--oxford-blue-2);
   border-block: 1px solid var(--space-cadet);
@@ -1324,8 +1325,8 @@ body {
 
 /* Hero Typography Discipline */
 .hero .container {
-  padding-block-start: 40px;
-  padding-block-end: 40px;
+  padding-block-start: 45px;
+  padding-block-end: 45px;
 }
 
 .hero .section-title {
@@ -1339,7 +1340,7 @@ body {
   font-size: 1.6rem;
   color: var(--cadet-blue-creyola);
   line-height: 1.6;
-  max-width: 48ch;
+  max-width: 50ch;
   margin-block-end: 28px;
 }
 
@@ -1350,9 +1351,14 @@ body {
   flex-wrap: wrap;
 }
 
-/* Service Cards Spacing */
+/* Service Cards Spacing & Polish */
 .service-card {
-  padding: 30px 25px;
+  padding: 32px 26px;
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
 }
 
 .service-card .card-title {
