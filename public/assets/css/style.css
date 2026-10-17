@@ -1260,9 +1260,111 @@ body {
 }
 
 /*-----------------------------------*\
-  #PRE-CADASTRO E CONTRATO DNA AUTO
+  #ANTI-SLOP CLEAN DESIGN SYSTEM (DNA AUTO)
 \*-----------------------------------*/
 
+/* Ticker de Métricas Sob o Hero (Section 4.7 Anti-Slop: Trust/Metrics UNDER Hero) */
+.metrics-strip {
+  background: var(--oxford-blue-2);
+  border-block: 1px solid var(--space-cadet);
+  padding: 24px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+.metric-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 12px;
+}
+
+.metric-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background: rgba(181, 18, 14, 0.12);
+  border: 1px solid var(--international-orange-engineering);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--international-orange-engineering);
+  flex-shrink: 0;
+}
+
+.metric-content strong {
+  display: block;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.6rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.metric-content span {
+  font-size: 1.3rem;
+  color: var(--cadet-blue-creyola);
+  line-height: 1.4;
+  display: block;
+}
+
+/* Hero Typography Discipline */
+.hero .container {
+  padding-block-start: 40px;
+  padding-block-end: 40px;
+}
+
+.hero .section-title {
+  font-size: clamp(2.8rem, 4.8vw, 4.2rem);
+  line-height: 1.15;
+  margin-block-end: 18px;
+  max-width: 18ch;
+}
+
+.hero .section-text {
+  font-size: 1.6rem;
+  color: var(--cadet-blue-creyola);
+  line-height: 1.6;
+  max-width: 48ch;
+  margin-block-end: 28px;
+}
+
+.hero-cta-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Service Cards Spacing */
+.service-card {
+  padding: 30px 25px;
+}
+
+.service-card .card-title {
+  margin-block: 15px 10px;
+}
+
+.service-card .card-text {
+  line-height: 1.6;
+  font-size: 1.4rem;
+}
+
+/* Modal de Credenciamento Limpo e Elegante */
 .modal-backdrop {
   display: none;
   position: fixed;
@@ -1270,11 +1372,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(4, 14, 30, 0.90);
+  background: rgba(4, 14, 30, 0.92);
   backdrop-filter: blur(8px);
   z-index: 1000;
   overflow-y: auto;
-  padding: 20px 15px;
+  padding: 30px 15px;
   align-items: center;
   justify-content: center;
 }
@@ -1285,36 +1387,42 @@ body {
 
 .modal-dialog {
   background: var(--oxford-blue-1);
-  border: 1px solid var(--international-orange-engineering);
+  border: 1px solid var(--space-cadet);
   border-radius: 8px;
   max-width: 680px;
   width: 100%;
-  padding: 35px 28px;
+  padding: 36px 32px;
   position: relative;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.85);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
   margin: auto;
 }
 
 .modal-close-btn {
   position: absolute;
-  top: 15px;
-  right: 18px;
+  top: 18px;
+  right: 20px;
   background: none;
   border: none;
-  color: var(--white);
-  font-size: 2.8rem;
+  color: var(--cadet-blue-creyola);
+  font-size: 2.6rem;
   cursor: pointer;
   line-height: 1;
   transition: var(--transition);
 }
 
 .modal-close-btn:hover {
-  color: var(--international-orange-engineering);
+  color: var(--white);
+}
+
+.modal-header-clean {
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--space-cadet);
+  padding-bottom: 18px;
 }
 
 .modal-title {
   font-family: var(--ff-chakra-petch);
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: var(--white);
   text-transform: uppercase;
@@ -1324,66 +1432,33 @@ body {
 
 .modal-subtitle {
   font-family: var(--ff-mulish);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   color: var(--cadet-blue-creyola);
-  margin-bottom: 20px;
   line-height: 1.5;
+  margin: 0;
 }
 
-.badge-scarcity {
+.modal-price-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(181, 18, 14, 0.2);
-  border: 1px solid var(--international-orange-engineering);
-  color: #ff8585;
+  gap: 10px;
+  background: rgba(181, 18, 14, 0.12);
+  border: 1px solid rgba(181, 18, 14, 0.4);
   padding: 6px 14px;
-  font-family: var(--ff-chakra-petch);
-  font-size: 1.25rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 15px;
   border-radius: 4px;
+  margin-top: 10px;
 }
 
-.price-offer-bar {
-  background: var(--oxford-blue-2);
-  border: 1px solid rgba(181, 18, 14, 0.5);
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.price-offer-bar .offer-label {
+.modal-price-pill .price-tag {
   font-family: var(--ff-chakra-petch);
-  font-size: 1.3rem;
-  color: var(--white);
-  font-weight: 600;
-}
-
-.price-offer-bar .offer-values {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.price-offer-bar .val-old {
-  font-size: 1.3rem;
-  color: var(--sonic-silver);
-  text-decoration: line-through;
-}
-
-.price-offer-bar .val-current {
-  font-family: var(--ff-chakra-petch);
-  font-size: 2rem;
   font-weight: 700;
+  font-size: 1.4rem;
   color: var(--international-orange-engineering);
+}
+
+.modal-price-pill .price-sub {
+  font-size: 1.2rem;
+  color: var(--cadet-blue-creyola);
 }
 
 .form-grid {
@@ -1404,27 +1479,36 @@ body {
 .form-group label {
   display: block;
   font-family: var(--ff-chakra-petch);
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   color: var(--white);
   margin-bottom: 6px;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-control {
   width: 100%;
-  padding: 11px 13px;
+  height: 44px;
+  padding: 0 14px;
   background: var(--oxford-blue-2);
   border: 1px solid var(--space-cadet);
   border-radius: 4px;
   color: var(--white);
   font-family: var(--ff-mulish);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   transition: var(--transition);
+}
+
+textarea.form-control {
+  height: auto;
+  padding: 10px 14px;
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--international-orange-engineering);
+  box-shadow: 0 0 0 1px var(--international-orange-engineering);
 }
 
 .form-control.is-invalid {
@@ -1443,13 +1527,13 @@ body {
   display: block;
 }
 
-/* Caixa de Termos e Contrato */
+/* Termo de Contrato Resumido */
 .contract-box {
   background: var(--oxford-blue-2);
   border: 1px solid var(--space-cadet);
   border-radius: 4px;
   padding: 12px 14px;
-  max-height: 140px;
+  max-height: 120px;
   overflow-y: auto;
   font-size: 1.2rem;
   line-height: 1.5;
@@ -1459,18 +1543,11 @@ body {
 }
 
 .contract-box::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 .contract-box::-webkit-scrollbar-thumb {
   background: var(--international-orange-engineering);
-  border-radius: 3px;
-}
-
-.contract-box h4 {
-  font-family: var(--ff-chakra-petch);
-  font-size: 1.25rem;
-  color: var(--white);
-  margin-bottom: 4px;
+  border-radius: 2px;
 }
 
 .contract-box p {
@@ -1503,7 +1580,7 @@ body {
 .form-alert {
   padding: 12px 16px;
   border-radius: 4px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   font-size: 1.35rem;
   display: none;
 }
@@ -1525,7 +1602,7 @@ body {
 .success-screen {
   display: none;
   text-align: center;
-  padding: 30px 20px;
+  padding: 24px 10px;
 }
 
 .success-screen.show {
@@ -1536,19 +1613,19 @@ body {
   display: inline-block;
   background: var(--oxford-blue-2);
   border: 1px dashed var(--international-orange-engineering);
-  padding: 10px 20px;
+  padding: 10px 24px;
   font-family: var(--ff-chakra-petch);
   font-size: 2.2rem;
   font-weight: 700;
   color: var(--international-orange-engineering);
-  margin: 15px 0;
+  margin: 16px 0;
   border-radius: 4px;
 }
 
 .loading-spinner {
   display: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border: 2px solid #fff;
   border-top-color: transparent;
   border-radius: 50%;
@@ -1566,37 +1643,4 @@ body {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* Tipografia Hero em Letras Maiores e mais Impactantes */
-.hero .section-title {
-  font-size: clamp(3rem, 5.5vw, 4.6rem);
-  line-height: 1.15;
-  margin-block-end: 20px;
-}
-
-.hero .section-subtitle {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-}
-
-.hero-highlight-box {
-  background: rgba(181, 18, 14, 0.12);
-  border-inline-start: 4px solid var(--international-orange-engineering);
-  padding: 12px 18px;
-  margin-block-end: 25px;
-  border-radius: 0 4px 4px 0;
-}
-
-.hero-highlight-box p {
-  font-family: var(--ff-chakra-petch);
-  font-size: 1.45rem;
-  color: var(--white);
-  line-height: 1.5;
-  margin: 0;
-}
-
-.hero-highlight-box strong {
-  color: var(--international-orange-engineering);
 }
