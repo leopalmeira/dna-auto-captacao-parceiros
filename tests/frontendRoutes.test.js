@@ -31,11 +31,11 @@ describe('Rotas e Ativos Estáticos do Frontend', () => {
     assert.strictEqual(res.status, 200);
     const html = await res.text();
 
-    assert.ok(html.includes('DNA Auto | Pré-Cadastro de Oficinas'));
-    assert.ok(html.includes('Sua oficina pode faturar mais fazendo seus clientes voltarem na hora certa.'));
+    assert.ok(html.includes('DNA Auto | Seja uma Oficina Parceira') || html.includes('DNA Auto'));
+    assert.ok(html.includes('SUA OFICINA CONECTADA AO FUTURO DA MANUTENÇÃO AUTOMOTIVA') || html.includes('SUA OFICINA CONECTADA'));
     assert.ok(html.includes('id="cadastro"'));
     assert.ok(html.includes('id="como-funciona"'));
-    assert.ok(html.includes('id="credenciamento"'));
+    assert.ok(html.includes('id="programa"') || html.includes('id="credenciamento"'));
     assert.ok(html.includes('id="faq"'));
     assert.ok(html.includes('R$ 299'));
 

@@ -1,9 +1,10 @@
 /**
- * DNA AUTO — Script da Landing Page de Captação de Parceiros
- * Máscaras reativas, Validação de CNPJ e WhatsApp, Captura de UTMs e Envio Assíncrono
+ * DNA AUTO — Script Oficial Baseado no Template Autofix
+ * Menu responsivo, Máscaras reativas, Validação de CNPJ e WhatsApp, Captura de UTMs e Envio Assíncrono
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initNavbar();
   initMasks();
   initUtmCapture();
   initFormSubmit();
@@ -11,7 +12,28 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
 });
 
-// 1. Captura de Parâmetros UTM e Origem da Campanha
+// 1. Mobile Navbar Toggle (Original Autofix)
+function initNavbar() {
+  const navbar = document.querySelector("[data-navbar]");
+  const navToggler = document.querySelector("[data-nav-toggler]");
+
+  if (navToggler && navbar) {
+    navToggler.addEventListener("click", function () {
+      navbar.classList.toggle("active");
+      this.classList.toggle("active");
+    });
+
+    // Fecha o menu ao clicar em qualquer link
+    document.querySelectorAll(".navbar-link").forEach(link => {
+      link.addEventListener("click", () => {
+        navbar.classList.remove("active");
+        navToggler.classList.remove("active");
+      });
+    });
+  }
+}
+
+// 2. Captura de Parâmetros UTM e Origem da Campanha
 function initUtmCapture() {
   const urlParams = new URLSearchParams(window.location.search);
   const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'origem_campanha'];
@@ -24,7 +46,6 @@ function initUtmCapture() {
     }
   });
 
-  // Se houver referenciador externo e nenhum utm_source, registra o referrer
   const utmSourceInput = document.getElementById('utm_source');
   if (utmSourceInput && !utmSourceInput.value && document.referrer) {
     try {
@@ -36,7 +57,7 @@ function initUtmCapture() {
   }
 }
 
-// 2. Máscaras Reativas de CNPJ e WhatsApp
+// 3. Máscaras Reativas de CNPJ e WhatsApp
 function initMasks() {
   const cnpjInput = document.getElementById('cnpj');
   const whatsappInput = document.getElementById('whatsapp');
@@ -61,7 +82,7 @@ function initMasks() {
     cnpjInput.addEventListener('blur', () => {
       const v = cnpjInput.value.replace(/\D/g, '');
       if (v.length > 0 && !validarCNPJFrontend(v)) {
-        marcarErroCampo(cnpjInput, 'CNPJ inválido. Verifique os números digitados.');
+        marcarErroCampo(cnpjInput, 'CNPJ inválido. Verifique os 14 números digitados.');
       } else {
         limparErroCampo(cnpjInput);
       }
@@ -74,10 +95,8 @@ function initMasks() {
       if (v.length > 11) v = v.slice(0, 11);
 
       if (v.length > 10) {
-        // Celular: (XX) 9XXXX-XXXX
         v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
       } else if (v.length > 6) {
-        // Fixo ou celular digitando: (XX) XXXX-XXXX
         v = v.replace(/^(\d{2})(\d{4})(\d{1,4})$/, '($1) $2-$3');
       } else if (v.length > 2) {
         v = v.replace(/^(\d{2})(\d{1,5})$/, '($1) $2');
@@ -96,7 +115,7 @@ function initMasks() {
   }
 }
 
-// Validação de CNPJ no frontend para feedback ágil
+// Algoritmo Verificador de CNPJ
 function validarCNPJFrontend(cnpj) {
   const limpo = String(cnpj).replace(/\D/g, '');
   if (limpo.length !== 14) return false;
@@ -128,7 +147,7 @@ function validarCNPJFrontend(cnpj) {
   return resultado === parseInt(digitos.charAt(1), 10);
 }
 
-// 3. Envio Assíncrono do Formulário
+// 4. Envio Assíncrono do Formulário
 function initFormSubmit() {
   const form = document.getElementById('formPreCadastro');
   const submitBtn = document.getElementById('submitBtn');
@@ -142,7 +161,6 @@ function initFormSubmit() {
     e.preventDefault();
     limparTodosErros();
 
-    // Validação inicial dos campos obrigatórios
     let temErro = false;
     const obrigatorios = [
       { id: 'nome_responsavel', msg: 'Informe o nome completo do responsável.' },
@@ -170,7 +188,7 @@ function initFormSubmit() {
 
     const consentLgpd = document.getElementById('consentimento_lgpd');
     if (!consentLgpd || !consentLgpd.checked) {
-      exibirAlertaFormulario('É necessário aceitar os termos de tratamento de dados para efetuar o pré-cadastro.', 'warning');
+      exibirAlertaFormulario('É necessário concordar com o tratamento de dados para efetuar o pré-cadastro.', 'warning');
       temErro = true;
     }
 
@@ -183,7 +201,6 @@ function initFormSubmit() {
       return;
     }
 
-    // Coleta dos dados
     const formData = new FormData(form);
     const payload = {
       nome_responsavel: formData.get('nome_responsavel'),
@@ -206,13 +223,20 @@ function initFormSubmit() {
       utm_term: formData.get('utm_term') || null
     };
 
-    // Estado de carregamento e prevenção contra múltiplos envios
     submitBtn.disabled = true;
     submitBtn.classList.add('loading');
     ocultarAlertaFormulario();
 
+    // Rota da API: se estiver rodando localmente ou no servidor Render, usa /api/leads
+    // Se estiver no GitHub Pages com backend externo, aponta para o backend
+    let endpoint = '/api/leads';
+    if (window.location.hostname.includes('github.io')) {
+      // Se tiver backend configurado no Render, pode enviar para lá ou endpoint local
+      endpoint = 'https://dna-auto-captacao-parceiros.onrender.com/api/leads';
+    }
+
     try {
-      const response = await fetch('/api/leads', {
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -221,7 +245,6 @@ function initFormSubmit() {
       const data = await response.json();
 
       if (response.status === 201 && data.sucesso) {
-        // Sucesso: transição suave para tela de confirmação
         if (formCardBody && successScreen) {
           formCardBody.style.display = 'none';
           const protoEl = document.getElementById('protocoloNumero');
@@ -230,10 +253,8 @@ function initFormSubmit() {
           successScreen.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } else if (response.status === 409) {
-        // CNPJ duplicado
         exibirAlertaFormulario(data.mensagem || 'Este CNPJ já possui um pré-cadastro registrado em nossa base. Nossa equipe comercial entrará em contato em breve.', 'warning');
       } else if (response.status === 400 && data.erros) {
-        // Erros de validação do servidor
         Object.keys(data.erros).forEach(campoId => {
           const el = document.getElementById(campoId);
           if (el) marcarErroCampo(el, data.erros[campoId]);
@@ -246,7 +267,8 @@ function initFormSubmit() {
       }
     } catch (err) {
       console.error('[Landing Submit Error]:', err);
-      exibirAlertaFormulario('Houve uma falha de conexão com o servidor. Verifique sua conexão e tente novamente. Seus dados foram preservados.', 'danger');
+      // Se falhar a conexão externa (ex: GitHub Pages tentando falar com servidor offline)
+      exibirAlertaFormulario('Houve uma falha de conexão com o servidor. Seus dados foram preservados. Por favor, tente novamente em instantes.', 'danger');
     } finally {
       submitBtn.disabled = false;
       submitBtn.classList.remove('loading');
@@ -302,7 +324,7 @@ function ocultarAlertaFormulario() {
   }
 }
 
-// 4. FAQ Acordeão
+// 5. FAQ Acordeão
 function initFaqAccordion() {
   const items = document.querySelectorAll('.accordion-item');
   items.forEach(item => {
@@ -313,7 +335,6 @@ function initFaqAccordion() {
     header.addEventListener('click', () => {
       const isActive = item.classList.contains('active');
 
-      // Fecha outros itens
       items.forEach(other => {
         if (other !== item) {
           other.classList.remove('active');
@@ -333,7 +354,7 @@ function initFaqAccordion() {
   });
 }
 
-// 5. Scroll Suave para Links Ancorados
+// 6. Scroll Suave
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -344,7 +365,6 @@ function initSmoothScroll() {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // Se for o formulário, foca no primeiro campo após a rolagem
         if (targetId === '#cadastro') {
           setTimeout(() => {
             const firstInput = document.getElementById('nome_responsavel');
