@@ -1260,7 +1260,7 @@ body {
 }
 
 /*-----------------------------------*\
-  #DNA AUTO — ENHANCED ANTI-SLOP SYSTEM
+  #DNA AUTO — ENHANCED APELATIVO & DUAL ADVANTAGES
   Applied by @frontend-specialist & @product-manager
 \*-----------------------------------*/
 
@@ -1296,7 +1296,7 @@ body {
 .metric-icon-wrap {
   width: 48px;
   height: 48px;
-  background: rgba(181, 18, 14, 0.12);
+  background: rgba(255, 70, 5, 0.15);
   border: 1px solid var(--international-orange-engineering);
   border-radius: 6px;
   display: flex;
@@ -1321,6 +1321,34 @@ body {
   color: var(--cadet-blue-creyola);
   line-height: 1.4;
   display: block;
+}
+
+/* Badge de Urgência no Hero */
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 70, 5, 0.2);
+  border: 1px solid var(--international-orange-engineering);
+  color: #ff8450;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  animation: pulse-border 2s infinite ease-in-out;
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 70, 5, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 70, 5, 0);
+  }
 }
 
 /* Hero Typography Discipline */
@@ -1349,6 +1377,132 @@ body {
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+/* Seção de Vantagens Duplas (Oficina vs Dono do Carro) */
+.dual-advantages {
+  padding-block: var(--section-padding);
+  background: var(--oxford-blue-1);
+  position: relative;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+@media (min-width: 992px) {
+  .advantages-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+}
+
+.advantage-card {
+  background: var(--oxford-blue-2);
+  border-radius: 8px;
+  padding: 36px 30px;
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.advantage-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.advantage-card.workshop-card {
+  border: 1px solid rgba(255, 70, 5, 0.4);
+  border-top: 4px solid var(--international-orange-engineering);
+}
+
+.advantage-card.driver-card {
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-top: 4px solid #10b981;
+}
+
+.advantage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.advantage-card.workshop-card .advantage-badge {
+  background: rgba(255, 70, 5, 0.15);
+  color: var(--international-orange-engineering);
+}
+
+.advantage-card.driver-card .advantage-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.advantage-card .advantage-title {
+  font-family: var(--ff-chakra-petch);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 24px;
+  line-height: 1.25;
+}
+
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.benefit-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.advantage-card.workshop-card .benefit-icon {
+  background: rgba(255, 70, 5, 0.15);
+  color: var(--international-orange-engineering);
+}
+
+.advantage-card.driver-card .benefit-icon {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.benefit-text strong {
+  display: block;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.benefit-text p {
+  font-size: 1.35rem;
+  color: var(--cadet-blue-creyola);
+  line-height: 1.55;
+  margin: 0;
 }
 
 /* Service Cards Spacing & Polish */
@@ -1448,8 +1602,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(181, 18, 14, 0.12);
-  border: 1px solid rgba(181, 18, 14, 0.4);
+  background: rgba(255, 70, 5, 0.15);
+  border: 1px solid rgba(255, 70, 5, 0.4);
   padding: 6px 14px;
   border-radius: 4px;
   margin-top: 10px;
