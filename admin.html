@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNA Auto | Gestão de Pré-Cadastros de Parceiros</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- 1. TELA DE LOGIN (PROTEÇÃO ADMIN) -->
+  <div id="loginContainer" class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: linear-gradient(135deg, #00d2ff, #2563eb); border-radius: 10px; color: #04070f; font-weight: 900; font-size: 1.3rem; margin-bottom: 0.5rem;">D</div>
+        <h1>DNA Auto Partner Hub</h1>
+        <p>Acesso restrito à equipe comercial e administrativa</p>
+      </div>
+
+      <div id="loginError" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1.25rem;"></div>
+
+      <form id="loginForm">
+        <div style="margin-bottom: 1.25rem;">
+          <label for="username" style="display: block; font-size: 0.82rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.4rem;">Usuário</label>
+          <input type="text" id="username" class="search-input" style="width: 100%; box-sizing: border-box;" placeholder="admin" required autocomplete="username">
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label for="password" style="display: block; font-size: 0.82rem; font-weight: 600; color: #94a3b8; margin-bottom: 0.4rem;">Senha</label>
+          <input type="password" id="password" class="search-input" style="width: 100%; box-sizing: border-box;" placeholder="••••••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" id="loginBtn" style="width: 100%; padding: 0.85rem; background: linear-gradient(135deg, #00d2ff, #2563eb); border: none; border-radius: 8px; color: #04070f; font-weight: 700; cursor: pointer; font-size: 0.95rem;">
+          Acessar Painel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. LAYOUT DO PAINEL ADMINISTRATIVO -->
+  <div id="adminLayout" class="admin-layout">
+    <!-- Navbar -->
+    <header class="admin-navbar">
+      <div class="admin-nav-left">
+        <a href="/" style="text-decoration: none; color: #fff; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="color: #00d2ff;">DNA</span> AUTO
+        </a>
+        <span class="admin-badge">Gestão de Leads</span>
+      </div>
+
+      <div class="admin-nav-right">
+        <span class="user-tag">Operador: <strong id="adminUserDisplay">admin</strong></span>
+        <button id="logoutBtn" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">Sair</button>
+      </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="admin-main">
+      <!-- KPIs Dashboard -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-card-label">Total de Interessados</span>
+          <div class="metric-card-val" id="metricTotal">0</div>
+          <span class="metric-card-sub">Pré-cadastros na base</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-card-label">Novos Pré-Cadastros</span>
+          <div class="metric-card-val" id="metricNovos" style="color: #38bdf8;">0</div>
+          <span class="metric-card-sub">Aguardando primeiro contato</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-card-label">Em Atendimento</span>
+          <div class="metric-card-val" id="metricEmAtendimento" style="color: #fbbf24;">0</div>
+          <span class="metric-card-sub">Contato, retorno ou negociação</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="metric-card-label">Credenciados</span>
+          <div class="metric-card-val" id="metricCredenciados" style="color: #34d399;">0</div>
+          <span class="metric-card-sub">Parceiros aprovados na rede</span>
+        </div>
+      </div>
+
+      <!-- Barra de Filtros, Busca e Exportação -->
+      <div class="controls-card">
+        <div class="filters-group">
+          <input type="text" id="searchLeadInput" class="search-input" placeholder="Buscar por CNPJ, Nome Fantasia ou Responsável...">
+
+          <select id="filterStatus" class="select-filter">
+            <option value="todos">Todos os Status</option>
+            <option value="Novo pré-cadastro">Novo pré-cadastro</option>
+            <option value="Em contato">Em contato</option>
+            <option value="Aguardando retorno">Aguardando retorno</option>
+            <option value="Interessado">Interessado</option>
+            <option value="Credenciamento em negociação">Credenciamento em negociação</option>
+            <option value="Credenciado">Credenciado</option>
+            <option value="Não interessado">Não interessado</option>
+          </select>
+
+          <select id="filterMunicipio" class="select-filter">
+            <option value="todos">Todos os Municípios</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+            <option value="Niterói">Niterói</option>
+            <option value="São Gonçalo">São Gonçalo</option>
+            <option value="Duque de Caxias">Duque de Caxias</option>
+            <option value="Nova Iguaçu">Nova Iguaçu</option>
+          </select>
+
+          <button id="refreshBtn" class="btn-details" title="Recarregar lista">
+            Atualizar
+          </button>
+        </div>
+
+        <div>
+          <button id="exportCsvBtn" style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; padding: 0.6rem 1.1rem; border-radius: 8px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar CSV
+          </button>
+        </div>
+      </div>
+
+      <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.75rem;" id="leadsCountDisplay">
+        Carregando...
+      </div>
+
+      <!-- Tabela de Leads -->
+      <div class="table-card">
+        <div class="table-responsive">
+          <table class="leads-table">
+            <thead>
+              <tr>
+                <th>Oficina / Responsável</th>
+                <th>CNPJ</th>
+                <th>WhatsApp</th>
+                <th>Localização</th>
+                <th>Status Comercial</th>
+                <th>Data Cadastro</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+              <!-- Renderizado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL DE DETALHES DO LEAD -->
+  <div id="leadModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitleFantasia" style="font-size: 1.3rem; margin: 0; color: #fff;">Detalhes da Oficina</h2>
+          <span style="font-size: 0.8rem; color: #94a3b8;">Ficha de Acompanhamento Comercial</span>
+        </div>
+        <button id="modalCloseBtn" class="modal-close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Ficha de Dados Cadastrais -->
+        <div class="detail-grid">
+          <div>
+            <div class="detail-item-label">Responsável</div>
+            <div class="detail-item-val" id="modalResp">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">CNPJ</div>
+            <div class="detail-item-val" id="modalCnpj">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">WhatsApp</div>
+            <div class="detail-item-val" id="modalWhats">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">E-mail Comercial</div>
+            <div class="detail-item-val" id="modalEmail">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">Município / Bairro</div>
+            <div class="detail-item-val" id="modalLocal">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">Tipo de Estabelecimento</div>
+            <div class="detail-item-val" id="modalTipo">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">Veículos / Mês</div>
+            <div class="detail-item-val" id="modalVeiculos">-</div>
+          </div>
+          <div>
+            <div class="detail-item-label">Data do Cadastro</div>
+            <div class="detail-item-val" id="modalData">-</div>
+          </div>
+          <div style="grid-column: span 2;">
+            <div class="detail-item-label">Origem / Campanha</div>
+            <div class="detail-item-val" id="modalUtm">-</div>
+          </div>
+          <div style="grid-column: span 2;">
+            <div class="detail-item-label">Observações Informadas</div>
+            <div class="detail-item-val" id="modalObs" style="font-style: italic; color: #cbd5e1;">-</div>
+          </div>
+        </div>
+
+        <!-- Atualização de Status Comercial -->
+        <div style="background: #080d1f; border: 1px solid var(--admin-border); border-radius: 10px; padding: 1.25rem;">
+          <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">Atualizar Status Comercial</h3>
+          <form id="modalStatusForm" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <select id="modalNovoStatus" class="select-filter" style="flex: 1;">
+                <option value="Novo pré-cadastro">Novo pré-cadastro</option>
+                <option value="Em contato">Em contato</option>
+                <option value="Aguardando retorno">Aguardando retorno</option>
+                <option value="Interessado">Interessado</option>
+                <option value="Credenciamento em negociação">Credenciamento em negociação</option>
+                <option value="Credenciado">Credenciado</option>
+                <option value="Não interessado">Não interessado</option>
+              </select>
+              <button type="submit" id="btnAtualizarStatus" class="btn-details" style="background: #00d2ff; color: #04070f; font-weight: 700; padding: 0.6rem 1.2rem;">Salvar Status</button>
+            </div>
+            <input type="text" id="modalStatusNota" class="search-input" style="width: 100%; box-sizing: border-box;" placeholder="Motivo ou detalhe da mudança de status (opcional)...">
+          </form>
+        </div>
+
+        <!-- Histórico e Registro de Anotações -->
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">Histórico de Contatos e Observações</h3>
+          
+          <form id="modalNoteForm" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+            <input type="text" id="modalNovaNota" class="search-input" style="flex: 1;" placeholder="Adicionar registro de contato ou anotação comercial..." required>
+            <button type="submit" id="btnSalvarNota" class="btn-details" style="background: rgba(255,255,255,0.08);">Adicionar</button>
+          </form>
+
+          <div id="modalTimeline" class="timeline">
+            <!-- Timeline renderizada via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
