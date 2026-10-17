@@ -14,7 +14,7 @@ if (navToggler && navbar) {
 }
 
 /**
- * MODAL DE PRÉ-CADASTRO DNA AUTO
+ * MODAL DE CREDENCIAMENTO E CONTRATO DNA AUTO
  */
 const modalBackdrop = document.getElementById("modalCadastro");
 const openModalBtns = document.querySelectorAll("[data-open-modal], a[href='#cadastro']");
@@ -25,7 +25,7 @@ function openModal() {
     modalBackdrop.classList.add("active");
     document.body.style.overflow = "hidden";
     const firstInput = document.getElementById("nome_responsavel");
-    if (firstInput) setTimeout(() => firstInput.focus(), 200);
+    if (firstInput) setTimeout(() => firstInput.focus(), 250);
   }
 }
 
@@ -65,7 +65,7 @@ if (window.location.hash === "#cadastro") {
 }
 
 /**
- * MÁSCARAS E VALIDAÇÃO CNPJ & WHATSAPP
+ * MÁSCARAS E VALIDAÇÃO DE CNPJ E WHATSAPP
  */
 const cnpjInput = document.getElementById("cnpj");
 const whatsappInput = document.getElementById("whatsapp");
@@ -136,7 +136,7 @@ function validarCNPJ(cnpj) {
 }
 
 /**
- * ENVIO DO FORMULÁRIO DE PRÉ-CADASTRO
+ * ENVIO DO FORMULÁRIO COM CONTRATO DE CREDENCIAMENTO
  */
 const form = document.getElementById("formPreCadastro");
 const submitBtn = document.getElementById("submitBtn");
@@ -171,24 +171,34 @@ if (form) {
     const munic = document.getElementById("municipio");
     const bairro = document.getElementById("bairro");
     const tipo = document.getElementById("tipo_estabelecimento");
+    const assinatura = document.getElementById("assinatura_digital");
     const consentLgpd = document.getElementById("consentimento_lgpd");
 
-    // Validações básicas
+    // Validações
     if (!nomeResp.value.trim() || !nomeFant.value.trim() || !cnpj.value.trim() || !whats.value.trim() || !munic.value.trim() || !bairro.value.trim() || !tipo.value) {
       showAlert("Por favor, preencha todos os campos obrigatórios marcados com asterisco (*).", "danger");
       return;
     }
 
     if (!validarCNPJ(cnpj.value)) {
-      showAlert("O CNPJ informado não é válido. Verifique os 14 dígitos digitados.", "danger");
+      showAlert("O CNPJ informado não é válido. Verifique os dígitos informados.", "danger");
       cnpj.focus();
       return;
     }
 
-    if (!consentLgpd || !consentLgpd.checked) {
-      showAlert("É necessário concordar com o tratamento de dados para enviar seu pré-cadastro.", "warning");
+    if (!assinatura || !assinatura.value.trim() || assinatura.value.trim().length < 3) {
+      showAlert("Por favor, informe a assinatura eletrônica do responsável legal para validação do contrato.", "danger");
+      if (assinatura) assinatura.focus();
       return;
     }
+
+    if (!consentLgpd || !consentLgpd.checked) {
+      showAlert("É necessário aceitar os termos do Contrato de Credenciamento e a Política de Privacidade.", "warning");
+      return;
+    }
+
+    const obsUser = document.getElementById("observacoes")?.value.trim() || "";
+    const obsFinal = `[CONTRATO ACEITO: Termo de Credenciamento DNA Auto RJ v1.0 | Assinatura: ${assinatura.value.trim()} | Data: ${new Date().toLocaleString('pt-BR')}] ${obsUser}`.trim();
 
     const payload = {
       nome_responsavel: nomeResp.value.trim(),
@@ -200,10 +210,10 @@ if (form) {
       tipo_estabelecimento: tipo.value,
       email: document.getElementById("email")?.value.trim() || null,
       faixa_veiculos: document.getElementById("faixa_veiculos")?.value || "Prefiro informar depois",
-      observacoes: document.getElementById("observacoes")?.value.trim() || null,
+      observacoes: obsFinal,
       consentimento_lgpd: consentLgpd.checked,
       consentimento_promocional: !!document.getElementById("consentimento_promocional")?.checked,
-      origem_campanha: "landing_page_autofix"
+      origem_campanha: "credenciamento_30dias_r299"
     };
 
     submitBtn.disabled = true;
@@ -231,7 +241,7 @@ if (form) {
           successScreen.classList.add("show");
         }
       } else if (response.status === 409) {
-        showAlert(data.mensagem || "Este CNPJ já possui um pré-cadastro registrado em nossa base. Nossa equipe entrará em contato.", "warning");
+        showAlert(data.mensagem || "Este CNPJ já possui um pré-cadastro ou credenciamento registrado em nossa base. Nossa equipe entrará em contato.", "warning");
       } else {
         showAlert(data.mensagem || "Não foi possível concluir o envio. Seus dados foram preservados. Tente novamente.", "danger");
       }
