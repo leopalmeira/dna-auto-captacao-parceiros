@@ -1,122 +1,110 @@
-/**
- * DNA AUTO — Script Oficial Baseado no Template Autofix
- * Menu responsivo, Máscaras reativas, Validação de CNPJ e WhatsApp, Captura de UTMs e Envio Assíncrono
- */
+'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
-  initMasks();
-  initUtmCapture();
-  initFormSubmit();
-  initFaqAccordion();
-  initSmoothScroll();
+/**
+ * MOBILE NAVBAR TOGGLE (ORIGINAL AUTOFIX)
+ */
+const navbar = document.querySelector("[data-navbar]");
+const navToggler = document.querySelector("[data-nav-toggler]");
+
+if (navToggler && navbar) {
+  navToggler.addEventListener("click", function () {
+    navbar.classList.toggle("active");
+    this.classList.toggle("active");
+  });
+}
+
+/**
+ * MODAL DE PRÉ-CADASTRO DNA AUTO
+ */
+const modalBackdrop = document.getElementById("modalCadastro");
+const openModalBtns = document.querySelectorAll("[data-open-modal], a[href='#cadastro']");
+const closeModalBtns = document.querySelectorAll("[data-close-modal]");
+
+function openModal() {
+  if (modalBackdrop) {
+    modalBackdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+    const firstInput = document.getElementById("nome_responsavel");
+    if (firstInput) setTimeout(() => firstInput.focus(), 200);
+  }
+}
+
+function closeModal() {
+  if (modalBackdrop) {
+    modalBackdrop.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
+openModalBtns.forEach(btn => {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+    openModal();
+  });
 });
 
-// 1. Mobile Navbar Toggle (Original Autofix)
-function initNavbar() {
-  const navbar = document.querySelector("[data-navbar]");
-  const navToggler = document.querySelector("[data-nav-toggler]");
+closeModalBtns.forEach(btn => {
+  btn.addEventListener("click", closeModal);
+});
 
-  if (navToggler && navbar) {
-    navToggler.addEventListener("click", function () {
-      navbar.classList.toggle("active");
-      this.classList.toggle("active");
-    });
-
-    // Fecha o menu ao clicar em qualquer link
-    document.querySelectorAll(".navbar-link").forEach(link => {
-      link.addEventListener("click", () => {
-        navbar.classList.remove("active");
-        navToggler.classList.remove("active");
-      });
-    });
-  }
-}
-
-// 2. Captura de Parâmetros UTM e Origem da Campanha
-function initUtmCapture() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'origem_campanha'];
-  
-  utmFields.forEach(field => {
-    const val = urlParams.get(field);
-    const inputEl = document.getElementById(field);
-    if (val && inputEl) {
-      inputEl.value = val;
-    }
+if (modalBackdrop) {
+  modalBackdrop.addEventListener("click", function (e) {
+    if (e.target === modalBackdrop) closeModal();
   });
-
-  const utmSourceInput = document.getElementById('utm_source');
-  if (utmSourceInput && !utmSourceInput.value && document.referrer) {
-    try {
-      const refUrl = new URL(document.referrer);
-      if (refUrl.hostname !== window.location.hostname) {
-        utmSourceInput.value = 'ref_' + refUrl.hostname;
-      }
-    } catch (e) {}
-  }
 }
 
-// 3. Máscaras Reativas de CNPJ e WhatsApp
-function initMasks() {
-  const cnpjInput = document.getElementById('cnpj');
-  const whatsappInput = document.getElementById('whatsapp');
-
-  if (cnpjInput) {
-    cnpjInput.addEventListener('input', (e) => {
-      let v = e.target.value.replace(/\D/g, '');
-      if (v.length > 14) v = v.slice(0, 14);
-      
-      if (v.length > 12) {
-        v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})$/, '$1.$2.$3/$4-$5');
-      } else if (v.length > 8) {
-        v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{1,4})$/, '$1.$2.$3/$4');
-      } else if (v.length > 5) {
-        v = v.replace(/^(\d{2})(\d{3})(\d{1,3})$/, '$1.$2.$3');
-      } else if (v.length > 2) {
-        v = v.replace(/^(\d{2})(\d{1,3})$/, '$1.$2');
-      }
-      e.target.value = v;
-    });
-
-    cnpjInput.addEventListener('blur', () => {
-      const v = cnpjInput.value.replace(/\D/g, '');
-      if (v.length > 0 && !validarCNPJFrontend(v)) {
-        marcarErroCampo(cnpjInput, 'CNPJ inválido. Verifique os 14 números digitados.');
-      } else {
-        limparErroCampo(cnpjInput);
-      }
-    });
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && modalBackdrop && modalBackdrop.classList.contains("active")) {
+    closeModal();
   }
+});
 
-  if (whatsappInput) {
-    whatsappInput.addEventListener('input', (e) => {
-      let v = e.target.value.replace(/\D/g, '');
-      if (v.length > 11) v = v.slice(0, 11);
-
-      if (v.length > 10) {
-        v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-      } else if (v.length > 6) {
-        v = v.replace(/^(\d{2})(\d{4})(\d{1,4})$/, '($1) $2-$3');
-      } else if (v.length > 2) {
-        v = v.replace(/^(\d{2})(\d{1,5})$/, '($1) $2');
-      }
-      e.target.value = v;
-    });
-
-    whatsappInput.addEventListener('blur', () => {
-      const v = whatsappInput.value.replace(/\D/g, '');
-      if (v.length > 0 && (v.length < 10 || v.length > 11)) {
-        marcarErroCampo(whatsappInput, 'Informe o DDD e o número completo do WhatsApp.');
-      } else {
-        limparErroCampo(whatsappInput);
-      }
-    });
-  }
+// Abre automaticamente se a URL tiver hash #cadastro
+if (window.location.hash === "#cadastro") {
+  setTimeout(openModal, 400);
 }
 
-// Algoritmo Verificador de CNPJ
-function validarCNPJFrontend(cnpj) {
+/**
+ * MÁSCARAS E VALIDAÇÃO CNPJ & WHATSAPP
+ */
+const cnpjInput = document.getElementById("cnpj");
+const whatsappInput = document.getElementById("whatsapp");
+
+if (cnpjInput) {
+  cnpjInput.addEventListener("input", function (e) {
+    let v = e.target.value.replace(/\D/g, "");
+    if (v.length > 14) v = v.slice(0, 14);
+
+    if (v.length > 12) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})$/, "$1.$2.$3/$4-$5");
+    } else if (v.length > 8) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{1,4})$/, "$1.$2.$3/$4");
+    } else if (v.length > 5) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{1,3})$/, "$1.$2.$3");
+    } else if (v.length > 2) {
+      v = v.replace(/^(\d{2})(\d{1,3})$/, "$1.$2");
+    }
+    e.target.value = v;
+  });
+}
+
+if (whatsappInput) {
+  whatsappInput.addEventListener("input", function (e) {
+    let v = e.target.value.replace(/\D/g, "");
+    if (v.length > 11) v = v.slice(0, 11);
+
+    if (v.length > 10) {
+      v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+    } else if (v.length > 6) {
+      v = v.replace(/^(\d{2})(\d{4})(\d{1,4})$/, "($1) $2-$3");
+    } else if (v.length > 2) {
+      v = v.replace(/^(\d{2})(\d{1,5})$/, "($1) $2");
+    }
+    e.target.value = v;
+  });
+}
+
+function validarCNPJ(cnpj) {
   const limpo = String(cnpj).replace(/\D/g, '');
   if (limpo.length !== 14) return false;
   if (/^(\d)\1{13}$/.test(limpo)) return false;
@@ -147,98 +135,89 @@ function validarCNPJFrontend(cnpj) {
   return resultado === parseInt(digitos.charAt(1), 10);
 }
 
-// 4. Envio Assíncrono do Formulário
-function initFormSubmit() {
-  const form = document.getElementById('formPreCadastro');
-  const submitBtn = document.getElementById('submitBtn');
-  const formAlert = document.getElementById('formAlert');
-  const successScreen = document.getElementById('successScreen');
-  const formCardBody = document.getElementById('formCardBody');
+/**
+ * ENVIO DO FORMULÁRIO DE PRÉ-CADASTRO
+ */
+const form = document.getElementById("formPreCadastro");
+const submitBtn = document.getElementById("submitBtn");
+const formAlert = document.getElementById("formAlert");
+const formCardBody = document.getElementById("formCardBody");
+const successScreen = document.getElementById("successScreen");
 
-  if (!form) return;
+function showAlert(msg, type = "danger") {
+  if (formAlert) {
+    formAlert.className = "form-alert " + type;
+    formAlert.textContent = msg;
+    formAlert.style.display = "block";
+  }
+}
 
-  form.addEventListener('submit', async (e) => {
+function hideAlert() {
+  if (formAlert) {
+    formAlert.style.display = "none";
+    formAlert.textContent = "";
+  }
+}
+
+if (form) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
-    limparTodosErros();
+    hideAlert();
 
-    let temErro = false;
-    const obrigatorios = [
-      { id: 'nome_responsavel', msg: 'Informe o nome completo do responsável.' },
-      { id: 'nome_fantasia', msg: 'Informe o nome fantasia da oficina.' },
-      { id: 'cnpj', msg: 'Informe um CNPJ válido.' },
-      { id: 'whatsapp', msg: 'Informe o WhatsApp de contato com DDD.' },
-      { id: 'municipio', msg: 'Informe o município da oficina.' },
-      { id: 'bairro', msg: 'Informe o bairro da oficina.' },
-      { id: 'tipo_estabelecimento', msg: 'Selecione o tipo de estabelecimento.' }
-    ];
+    const nomeResp = document.getElementById("nome_responsavel");
+    const nomeFant = document.getElementById("nome_fantasia");
+    const cnpj = document.getElementById("cnpj");
+    const whats = document.getElementById("whatsapp");
+    const munic = document.getElementById("municipio");
+    const bairro = document.getElementById("bairro");
+    const tipo = document.getElementById("tipo_estabelecimento");
+    const consentLgpd = document.getElementById("consentimento_lgpd");
 
-    obrigatorios.forEach(item => {
-      const el = document.getElementById(item.id);
-      if (!el || !el.value.trim()) {
-        marcarErroCampo(el, item.msg);
-        temErro = true;
-      }
-    });
-
-    const cnpjEl = document.getElementById('cnpj');
-    if (cnpjEl && !validarCNPJFrontend(cnpjEl.value)) {
-      marcarErroCampo(cnpjEl, 'CNPJ inválido. Verifique os 14 números digitados.');
-      temErro = true;
-    }
-
-    const consentLgpd = document.getElementById('consentimento_lgpd');
-    if (!consentLgpd || !consentLgpd.checked) {
-      exibirAlertaFormulario('É necessário concordar com o tratamento de dados para efetuar o pré-cadastro.', 'warning');
-      temErro = true;
-    }
-
-    if (temErro) {
-      const primeiroErro = form.querySelector('.is-invalid');
-      if (primeiroErro) {
-        primeiroErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        primeiroErro.focus();
-      }
+    // Validações básicas
+    if (!nomeResp.value.trim() || !nomeFant.value.trim() || !cnpj.value.trim() || !whats.value.trim() || !munic.value.trim() || !bairro.value.trim() || !tipo.value) {
+      showAlert("Por favor, preencha todos os campos obrigatórios marcados com asterisco (*).", "danger");
       return;
     }
 
-    const formData = new FormData(form);
+    if (!validarCNPJ(cnpj.value)) {
+      showAlert("O CNPJ informado não é válido. Verifique os 14 dígitos digitados.", "danger");
+      cnpj.focus();
+      return;
+    }
+
+    if (!consentLgpd || !consentLgpd.checked) {
+      showAlert("É necessário concordar com o tratamento de dados para enviar seu pré-cadastro.", "warning");
+      return;
+    }
+
     const payload = {
-      nome_responsavel: formData.get('nome_responsavel'),
-      nome_fantasia: formData.get('nome_fantasia'),
-      cnpj: formData.get('cnpj'),
-      whatsapp: formData.get('whatsapp'),
-      municipio: formData.get('municipio'),
-      bairro: formData.get('bairro'),
-      tipo_estabelecimento: formData.get('tipo_estabelecimento'),
-      email: formData.get('email') || null,
-      faixa_veiculos: formData.get('faixa_veiculos') || 'Prefiro informar depois',
-      observacoes: formData.get('observacoes') || null,
+      nome_responsavel: nomeResp.value.trim(),
+      nome_fantasia: nomeFant.value.trim(),
+      cnpj: cnpj.value.trim(),
+      whatsapp: whats.value.trim(),
+      municipio: munic.value.trim(),
+      bairro: bairro.value.trim(),
+      tipo_estabelecimento: tipo.value,
+      email: document.getElementById("email")?.value.trim() || null,
+      faixa_veiculos: document.getElementById("faixa_veiculos")?.value || "Prefiro informar depois",
+      observacoes: document.getElementById("observacoes")?.value.trim() || null,
       consentimento_lgpd: consentLgpd.checked,
-      consentimento_promocional: !!document.getElementById('consentimento_promocional')?.checked,
-      origem_campanha: formData.get('origem_campanha') || 'web_landing_page',
-      utm_source: formData.get('utm_source') || null,
-      utm_medium: formData.get('utm_medium') || null,
-      utm_campaign: formData.get('utm_campaign') || null,
-      utm_content: formData.get('utm_content') || null,
-      utm_term: formData.get('utm_term') || null
+      consentimento_promocional: !!document.getElementById("consentimento_promocional")?.checked,
+      origem_campanha: "landing_page_autofix"
     };
 
     submitBtn.disabled = true;
-    submitBtn.classList.add('loading');
-    ocultarAlertaFormulario();
+    submitBtn.classList.add("loading");
 
-    // Rota da API: se estiver rodando localmente ou no servidor Render, usa /api/leads
-    // Se estiver no GitHub Pages com backend externo, aponta para o backend
-    let endpoint = '/api/leads';
-    if (window.location.hostname.includes('github.io')) {
-      // Se tiver backend configurado no Render, pode enviar para lá ou endpoint local
-      endpoint = 'https://dna-auto-captacao-parceiros.onrender.com/api/leads';
+    let endpoint = "/api/leads";
+    if (window.location.hostname.includes("github.io")) {
+      endpoint = "https://dna-auto-captacao-parceiros.onrender.com/api/leads";
     }
 
     try {
       const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
 
@@ -246,132 +225,22 @@ function initFormSubmit() {
 
       if (response.status === 201 && data.sucesso) {
         if (formCardBody && successScreen) {
-          formCardBody.style.display = 'none';
-          const protoEl = document.getElementById('protocoloNumero');
-          if (protoEl) protoEl.textContent = data.protocolo || 'CONFIRMADO';
-          successScreen.classList.add('show');
-          successScreen.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          formCardBody.style.display = "none";
+          const protoEl = document.getElementById("protocoloNumero");
+          if (protoEl) protoEl.textContent = data.protocolo || "CONFIRMADO";
+          successScreen.classList.add("show");
         }
       } else if (response.status === 409) {
-        exibirAlertaFormulario(data.mensagem || 'Este CNPJ já possui um pré-cadastro registrado em nossa base. Nossa equipe comercial entrará em contato em breve.', 'warning');
-      } else if (response.status === 400 && data.erros) {
-        Object.keys(data.erros).forEach(campoId => {
-          const el = document.getElementById(campoId);
-          if (el) marcarErroCampo(el, data.erros[campoId]);
-        });
-        exibirAlertaFormulario(data.mensagem || 'Por favor, revise os campos destacados abaixo.', 'danger');
-      } else if (response.status === 429) {
-        exibirAlertaFormulario(data.mensagem || 'Muitas tentativas a partir deste dispositivo. Por favor, aguarde alguns minutos.', 'warning');
+        showAlert(data.mensagem || "Este CNPJ já possui um pré-cadastro registrado em nossa base. Nossa equipe entrará em contato.", "warning");
       } else {
-        exibirAlertaFormulario(data.mensagem || 'Não foi possível concluir o envio no momento. Seus dados foram preservados. Tente novamente.', 'danger');
+        showAlert(data.mensagem || "Não foi possível concluir o envio. Seus dados foram preservados. Tente novamente.", "danger");
       }
     } catch (err) {
-      console.error('[Landing Submit Error]:', err);
-      // Se falhar a conexão externa (ex: GitHub Pages tentando falar com servidor offline)
-      exibirAlertaFormulario('Houve uma falha de conexão com o servidor. Seus dados foram preservados. Por favor, tente novamente em instantes.', 'danger');
+      console.error("[Submit error]:", err);
+      showAlert("Falha de conexão com o servidor. Seus dados foram preservados. Tente novamente em instantes.", "danger");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.classList.remove('loading');
+      submitBtn.classList.remove("loading");
     }
-  });
-}
-
-function marcarErroCampo(inputEl, mensagem) {
-  if (!inputEl) return;
-  inputEl.classList.add('is-invalid');
-  const parent = inputEl.closest('.form-group');
-  if (parent) {
-    let errEl = parent.querySelector('.error-feedback');
-    if (!errEl) {
-      errEl = document.createElement('span');
-      errEl.className = 'error-feedback';
-      parent.appendChild(errEl);
-    }
-    errEl.textContent = mensagem;
-    errEl.classList.add('show');
-  }
-}
-
-function limparErroCampo(inputEl) {
-  if (!inputEl) return;
-  inputEl.classList.remove('is-invalid');
-  const parent = inputEl.closest('.form-group');
-  if (parent) {
-    const errEl = parent.querySelector('.error-feedback');
-    if (errEl) errEl.classList.remove('show');
-  }
-}
-
-function limparTodosErros() {
-  document.querySelectorAll('.form-control.is-invalid').forEach(el => el.classList.remove('is-invalid'));
-  document.querySelectorAll('.error-feedback.show').forEach(el => el.classList.remove('show'));
-  ocultarAlertaFormulario();
-}
-
-function exibirAlertaFormulario(msg, tipo = 'danger') {
-  const alertEl = document.getElementById('formAlert');
-  if (!alertEl) return;
-  alertEl.className = `form-alert alert-${tipo} show`;
-  alertEl.textContent = msg;
-  alertEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function ocultarAlertaFormulario() {
-  const alertEl = document.getElementById('formAlert');
-  if (alertEl) {
-    alertEl.className = 'form-alert';
-    alertEl.textContent = '';
-  }
-}
-
-// 5. FAQ Acordeão
-function initFaqAccordion() {
-  const items = document.querySelectorAll('.accordion-item');
-  items.forEach(item => {
-    const header = item.querySelector('.accordion-header');
-    const content = item.querySelector('.accordion-content');
-    if (!header || !content) return;
-
-    header.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-
-      items.forEach(other => {
-        if (other !== item) {
-          other.classList.remove('active');
-          const otherContent = other.querySelector('.accordion-content');
-          if (otherContent) otherContent.style.maxHeight = null;
-        }
-      });
-
-      if (!isActive) {
-        item.classList.add('active');
-        content.style.maxHeight = content.scrollHeight + 'px';
-      } else {
-        item.classList.remove('active');
-        content.style.maxHeight = null;
-      }
-    });
-  });
-}
-
-// 6. Scroll Suave
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        if (targetId === '#cadastro') {
-          setTimeout(() => {
-            const firstInput = document.getElementById('nome_responsavel');
-            if (firstInput) firstInput.focus();
-          }, 450);
-        }
-      }
-    });
   });
 }
