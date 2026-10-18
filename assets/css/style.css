@@ -1315,32 +1315,25 @@ body {
   letter-spacing: 1.5px;
 }
 
-/* Badge de Urgência no Hero com Toque Azul & Laranja */
-.urgency-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--dna-blue-bg);
-  border: 1px solid var(--dna-blue);
-  color: #60a5fa;
-  padding: 5px 14px;
-  border-radius: 50px;
+/* Subtítulo Autofix Estilo Red Slash (Limpo, Elegante e sem Oval Apertado) */
+.hero-clean-subtitle {
+  color: var(--international-orange-engineering);
   font-family: var(--ff-chakra-petch);
-  font-size: 1.2rem;
   font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 12px;
-  box-shadow: 0 0 15px var(--dna-blue-glow);
+  margin-block-end: 6px;
+  display: block;
 }
 
 /* ========================================================
-   HERO: DISPOSIÇÃO MOBILE COM CARRO NA 1ª DOBRA (PRINT DO USUÁRIO)
+   HERO: DISPOSIÇÃO MOBILE COM CARRO 100% VISÍVEL NA 1ª DOBRA
    ======================================================== */
 .hero {
   position: relative;
-  padding-block-start: 75px;
-  padding-block-end: 15px;
+  padding-block-start: 68px;
+  padding-block-end: 10px;
   text-align: center;
   z-index: 1;
   overflow: hidden;
@@ -1355,14 +1348,14 @@ body {
 
 .hero-content {
   width: 100%;
-  max-width: 620px;
+  max-width: 600px;
   margin-inline: auto;
 }
 
 .hero .section-title {
-  font-size: clamp(2.3rem, 6.4vw, 3.4rem);
+  font-size: clamp(2.2rem, 5.8vw, 3.2rem);
   line-height: 1.15;
-  margin-block-end: 10px;
+  margin-block-end: 8px;
   color: var(--white);
   width: 100%;
   letter-spacing: 0.5px;
@@ -1374,12 +1367,11 @@ body {
 }
 
 .hero .section-text {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   color: var(--text-readable-sub);
-  line-height: 1.45;
-  margin-block-end: 16px;
+  line-height: 1.4;
+  margin-block-end: 14px;
   width: 100%;
-  /* Expandido para as laterais conforme solicitado */
   max-width: 100%;
 }
 
@@ -1389,27 +1381,16 @@ body {
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin-block-end: 12px;
+  margin-block-end: 10px;
 }
 
-/* Botão Primário Azul DNA Auto ou Laranja com Alto Contraste */
-.btn-dna-blue {
-  background: var(--dna-blue);
-  color: var(--white);
-  box-shadow: 0 4px 20px var(--dna-blue-glow);
-}
-
-.btn-dna-blue:hover {
-  background: var(--dna-blue-hover);
-  box-shadow: 0 6px 24px var(--dna-blue-glow);
-}
-
-/* Carro na 1ª Dobra no Mobile */
+/* Carro 100% Dentro da 1ª Dobra no Mobile */
 .hero-banner {
   width: 100%;
-  max-width: 420px;
+  max-width: 360px;
   margin-inline: auto;
   display: block;
+  margin-block-start: 4px;
 }
 
 .hero-banner img {
@@ -1445,6 +1426,7 @@ body {
 
   .hero-banner {
     max-width: 100%;
+    margin-block-start: 0;
   }
 }
 
@@ -1710,18 +1692,18 @@ body {
 }
 
 .service-card .card-detail-item.for-driver strong {
-  color: #38bdf8; /* Azul DNA Auto Light */
+  color: #38bdf8;
 }
 
 .service-card .card-detail-item.for-workshop strong {
-  color: var(--international-orange-engineering); /* Laranja Oficina */
+  color: var(--international-orange-engineering);
 }
 
 .service-card .card-detail-item p {
   margin: 0;
   font-size: 1.35rem;
   line-height: 1.55;
-  color: var(--text-readable-sub); /* Leitura nítida de alto contraste */
+  color: var(--text-readable-sub);
 }
 
 /* Modal de Credenciamento Limpo e Elegante */
