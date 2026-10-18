@@ -254,3 +254,33 @@ if (form) {
     }
   });
 }
+
+/**
+ * ACCORDION INTERATIVO DOS CARDS DE SERVIÇOS (PROGRESSIVE DISCLOSURE)
+ */
+function initServiceAccordions() {
+  const cards = document.querySelectorAll('.service-card-accordion');
+  cards.forEach(card => {
+    card.addEventListener('click', function (e) {
+      // Se clicou no link interno, não altera o accordion
+      if (e.target.closest('a')) return;
+      
+      const wasActive = this.classList.contains('active');
+      this.classList.toggle('active', !wasActive);
+      this.setAttribute('aria-expanded', !wasActive);
+    });
+
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initServiceAccordions);
+} else {
+  initServiceAccordions();
+}
