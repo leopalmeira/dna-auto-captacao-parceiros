@@ -1260,15 +1260,199 @@ body {
 }
 
 /*-----------------------------------*\
-  #DNA AUTO — ENHANCED APELATIVO & DUAL ADVANTAGES
-  Applied by @frontend-specialist & @product-manager
+  #DNA AUTO — SISTEMA AZUL DNA AUTO & CONTRASTE ALTO (LEGIBILIDADE MÁXIMA)
+  Applied by @frontend-specialist, @frontend-design & @product-manager
 \*-----------------------------------*/
+
+:root {
+  /* Cores Oficiais DNA Auto */
+  --dna-blue: #0066FF;
+  --dna-blue-light: #38bdf8;
+  --dna-blue-hover: #0052cc;
+  --dna-blue-glow: rgba(0, 102, 255, 0.35);
+  --dna-blue-bg: rgba(0, 102, 255, 0.15);
+  
+  /* Laranja Automotivo e Cores de Apoio */
+  --international-orange-engineering: #ff4605;
+  --orange-hover: #e03a00;
+  --emerald-green: #10b981;
+  
+  /* Contraste Máximo para Leitura Perfeita (WCAG AAA) */
+  --white: #ffffff;
+  --text-high-contrast: #f8fafc;
+  --text-readable-sub: #cbd5e1; /* Cinza claro nítido para leitura fácil do mecânico */
+  --text-muted: #94a3b8;
+  
+  /* Fundos Escuros Profundos */
+  --space-cadet: #1e293b;
+  --oxford-blue-1: #090e1a;
+  --oxford-blue-2: #0f172a;
+}
+
+/* Tipografia e Legibilidade Geral */
+body {
+  color: var(--text-readable-sub);
+  background-color: var(--oxford-blue-1);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Logo DNA Auto com o Azul Oficial da Ferramenta */
+.logo-dna-blue {
+  font-family: var(--ff-chakra-petch);
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: var(--dna-blue);
+  letter-spacing: 1.5px;
+  text-shadow: 0 0 16px var(--dna-blue-glow);
+}
+
+.logo-auto-orange {
+  font-family: var(--ff-chakra-petch);
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: var(--international-orange-engineering);
+  letter-spacing: 1.5px;
+}
+
+/* Badge de Urgência no Hero com Toque Azul & Laranja */
+.urgency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dna-blue-bg);
+  border: 1px solid var(--dna-blue);
+  color: #60a5fa;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 15px var(--dna-blue-glow);
+}
+
+/* ========================================================
+   HERO: DISPOSIÇÃO MOBILE COM CARRO NA 1ª DOBRA (PRINT DO USUÁRIO)
+   ======================================================== */
+.hero {
+  position: relative;
+  padding-block-start: 75px;
+  padding-block-end: 15px;
+  text-align: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 16px;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.hero .section-title {
+  font-size: clamp(2.3rem, 6.4vw, 3.4rem);
+  line-height: 1.15;
+  margin-block-end: 10px;
+  color: var(--white);
+  width: 100%;
+  letter-spacing: 0.5px;
+}
+
+.hero .section-title .blue-accent {
+  color: var(--dna-blue-light);
+  text-shadow: 0 0 14px var(--dna-blue-glow);
+}
+
+.hero .section-text {
+  font-size: 1.45rem;
+  color: var(--text-readable-sub);
+  line-height: 1.45;
+  margin-block-end: 16px;
+  width: 100%;
+  /* Expandido para as laterais conforme solicitado */
+  max-width: 100%;
+}
+
+.hero-cta-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-block-end: 12px;
+}
+
+/* Botão Primário Azul DNA Auto ou Laranja com Alto Contraste */
+.btn-dna-blue {
+  background: var(--dna-blue);
+  color: var(--white);
+  box-shadow: 0 4px 20px var(--dna-blue-glow);
+}
+
+.btn-dna-blue:hover {
+  background: var(--dna-blue-hover);
+  box-shadow: 0 6px 24px var(--dna-blue-glow);
+}
+
+/* Carro na 1ª Dobra no Mobile */
+.hero-banner {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  display: block;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-inline: auto;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding-block-start: 110px;
+    padding-block-end: 50px;
+    text-align: left;
+  }
+
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 540px;
+    margin-inline: 0;
+  }
+
+  .hero-cta-wrap {
+    justify-content: flex-start;
+  }
+
+  .hero-banner {
+    max-width: 100%;
+  }
+}
 
 /* Ticker de Métricas Sob o Hero */
 .metrics-strip {
   background: var(--oxford-blue-2);
   border-block: 1px solid var(--space-cadet);
-  padding: 24px 0;
+  padding: 22px 0;
   position: relative;
   z-index: 2;
 }
@@ -1276,7 +1460,7 @@ body {
 .metrics-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 
 @media (min-width: 768px) {
@@ -1289,27 +1473,39 @@ body {
 .metric-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 8px 12px;
+  gap: 14px;
+  padding: 6px 10px;
 }
 
 .metric-icon-wrap {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 70, 5, 0.15);
-  border: 1px solid var(--international-orange-engineering);
+  width: 46px;
+  height: 46px;
+  background: var(--dna-blue-bg);
+  border: 1px solid var(--dna-blue);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--international-orange-engineering);
+  color: var(--dna-blue-light);
   flex-shrink: 0;
+}
+
+.metric-item:nth-child(2) .metric-icon-wrap {
+  background: rgba(255, 70, 5, 0.15);
+  border-color: var(--international-orange-engineering);
+  color: var(--international-orange-engineering);
+}
+
+.metric-item:nth-child(3) .metric-icon-wrap {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--emerald-green);
+  color: var(--emerald-green);
 }
 
 .metric-content strong {
   display: block;
   font-family: var(--ff-chakra-petch);
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   color: var(--white);
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1318,68 +1514,14 @@ body {
 
 .metric-content span {
   font-size: 1.3rem;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
   line-height: 1.4;
   display: block;
 }
 
-/* Badge de Urgência no Hero */
-.urgency-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 70, 5, 0.2);
-  border: 1px solid var(--international-orange-engineering);
-  color: #ff8450;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-family: var(--ff-chakra-petch);
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 18px;
-  animation: pulse-border 2s infinite ease-in-out;
-}
-
-@keyframes pulse-border {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 70, 5, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(255, 70, 5, 0);
-  }
-}
-
-/* Hero Typography Discipline */
-.hero .container {
-  padding-block-start: 45px;
-  padding-block-end: 45px;
-}
-
-.hero .section-title {
-  font-size: clamp(2.8rem, 4.8vw, 4.2rem);
-  line-height: 1.15;
-  margin-block-end: 18px;
-  max-width: 18ch;
-}
-
-.hero .section-text {
-  font-size: 1.6rem;
-  color: var(--cadet-blue-creyola);
-  line-height: 1.6;
-  max-width: 50ch;
-  margin-block-end: 28px;
-}
-
-.hero-cta-wrap {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-/* Seção de Vantagens Duplas (Oficina vs Dono do Carro) */
+/* ========================================================
+   SEÇÃO DE VANTAGENS DUPLAS: OFICINA & DONO DO CARRO
+   ======================================================== */
 .dual-advantages {
   padding-block: var(--section-padding);
   background: var(--oxford-blue-1);
@@ -1389,28 +1531,28 @@ body {
 .advantages-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 30px;
-  margin-top: 40px;
+  gap: 26px;
+  margin-top: 36px;
 }
 
 @media (min-width: 992px) {
   .advantages-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 35px;
+    gap: 32px;
   }
 }
 
 .advantage-card {
   background: var(--oxford-blue-2);
   border-radius: 8px;
-  padding: 36px 30px;
+  padding: 32px 26px;
   position: relative;
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .advantage-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
 }
 
 .advantage-card.workshop-card {
@@ -1419,47 +1561,47 @@ body {
 }
 
 .advantage-card.driver-card {
-  border: 1px solid rgba(16, 185, 129, 0.4);
-  border-top: 4px solid #10b981;
+  border: 1px solid rgba(0, 102, 255, 0.4);
+  border-top: 4px solid var(--dna-blue);
 }
 
 .advantage-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 4px;
   font-family: var(--ff-chakra-petch);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .advantage-card.workshop-card .advantage-badge {
   background: rgba(255, 70, 5, 0.15);
-  color: var(--international-orange-engineering);
+  color: #ff8450;
 }
 
 .advantage-card.driver-card .advantage-badge {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  background: var(--dna-blue-bg);
+  color: var(--dna-blue-light);
 }
 
 .advantage-card .advantage-title {
   font-family: var(--ff-chakra-petch);
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   line-height: 1.25;
 }
 
 .benefit-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .benefit-item {
@@ -1469,8 +1611,8 @@ body {
 }
 
 .benefit-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1486,8 +1628,8 @@ body {
 }
 
 .advantage-card.driver-card .benefit-icon {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10b981;
+  background: var(--dna-blue-bg);
+  color: var(--dna-blue-light);
 }
 
 .benefit-text strong {
@@ -1495,33 +1637,91 @@ body {
   font-family: var(--ff-chakra-petch);
   font-size: 1.5rem;
   color: var(--white);
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .benefit-text p {
   font-size: 1.35rem;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
   line-height: 1.55;
   margin: 0;
 }
 
-/* Service Cards Spacing & Polish */
+/* ========================================================
+   SERVICE CARDS: TEXTOS COMPLETOS, EXPLICATIVOS E SEM LINKS REPETITIVOS
+   ======================================================== */
 .service-card {
-  padding: 32px 26px;
+  padding: 30px 22px;
   transition: transform var(--transition), border-color var(--transition);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--oxford-blue-2);
+  border: 1px solid var(--space-cadet);
+  border-radius: 8px;
 }
 
 .service-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
+  border-color: var(--dna-blue);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+}
+
+.service-card .card-icon {
+  margin-inline: auto;
+  margin-block-end: 18px;
 }
 
 .service-card .card-title {
-  margin-block: 15px 10px;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  margin-block: 0 16px;
+  line-height: 1.25;
 }
 
-.service-card .card-text {
-  line-height: 1.6;
-  font-size: 1.4rem;
+.service-card .card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 1.35rem;
+  line-height: 1.55;
+}
+
+.service-card .card-detail-item {
+  background: rgba(4, 14, 30, 0.55);
+  border: 1px solid var(--space-cadet);
+  border-radius: 6px;
+  padding: 14px 14px;
+}
+
+.service-card .card-detail-item strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-chakra-petch);
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-card .card-detail-item.for-driver strong {
+  color: #38bdf8; /* Azul DNA Auto Light */
+}
+
+.service-card .card-detail-item.for-workshop strong {
+  color: var(--international-orange-engineering); /* Laranja Oficina */
+}
+
+.service-card .card-detail-item p {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: var(--text-readable-sub); /* Leitura nítida de alto contraste */
 }
 
 /* Modal de Credenciamento Limpo e Elegante */
@@ -1532,7 +1732,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(4, 14, 30, 0.92);
+  background: rgba(4, 14, 30, 0.94);
   backdrop-filter: blur(8px);
   z-index: 1000;
   overflow-y: auto;
@@ -1563,7 +1763,7 @@ body {
   right: 20px;
   background: none;
   border: none;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
   font-size: 2.6rem;
   cursor: pointer;
   line-height: 1;
@@ -1593,7 +1793,7 @@ body {
 .modal-subtitle {
   font-family: var(--ff-mulish);
   font-size: 1.35rem;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
   line-height: 1.5;
   margin: 0;
 }
@@ -1602,8 +1802,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 70, 5, 0.15);
-  border: 1px solid rgba(255, 70, 5, 0.4);
+  background: var(--dna-blue-bg);
+  border: 1px solid var(--dna-blue);
   padding: 6px 14px;
   border-radius: 4px;
   margin-top: 10px;
@@ -1613,12 +1813,12 @@ body {
   font-family: var(--ff-chakra-petch);
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--international-orange-engineering);
+  color: var(--dna-blue-light);
 }
 
 .modal-price-pill .price-sub {
   font-size: 1.2rem;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
 }
 
 .form-grid {
@@ -1667,8 +1867,8 @@ textarea.form-control {
 
 .form-control:focus {
   outline: none;
-  border-color: var(--international-orange-engineering);
-  box-shadow: 0 0 0 1px var(--international-orange-engineering);
+  border-color: var(--dna-blue);
+  box-shadow: 0 0 0 1px var(--dna-blue);
 }
 
 .form-control.is-invalid {
@@ -1692,12 +1892,12 @@ textarea.form-control {
   background: var(--oxford-blue-2);
   border: 1px solid var(--space-cadet);
   border-radius: 4px;
-  padding: 12px 14px;
-  max-height: 120px;
+  padding: 14px 16px;
+  max-height: 130px;
   overflow-y: auto;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: var(--cadet-blue-creyola);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: var(--text-readable-sub);
   margin-top: 4px;
   margin-bottom: 12px;
 }
@@ -1706,7 +1906,7 @@ textarea.form-control {
   width: 5px;
 }
 .contract-box::-webkit-scrollbar-thumb {
-  background: var(--international-orange-engineering);
+  background: var(--dna-blue);
   border-radius: 2px;
 }
 
@@ -1719,21 +1919,21 @@ textarea.form-control {
   align-items: flex-start;
   gap: 10px;
   font-size: 1.25rem;
-  color: var(--cadet-blue-creyola);
+  color: var(--text-readable-sub);
   cursor: pointer;
   line-height: 1.4;
 }
 
 .checkbox-label input[type="checkbox"] {
   margin-top: 2px;
-  accent-color: var(--international-orange-engineering);
+  accent-color: var(--dna-blue);
   width: 16px;
   height: 16px;
   flex-shrink: 0;
 }
 
 .checkbox-label a {
-  color: var(--international-orange-engineering);
+  color: var(--dna-blue-light);
   text-decoration: underline;
 }
 
@@ -1772,12 +1972,12 @@ textarea.form-control {
 .protocol-badge {
   display: inline-block;
   background: var(--oxford-blue-2);
-  border: 1px dashed var(--international-orange-engineering);
+  border: 1px dashed var(--dna-blue);
   padding: 10px 24px;
   font-family: var(--ff-chakra-petch);
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--international-orange-engineering);
+  color: var(--dna-blue-light);
   margin: 16px 0;
   border-radius: 4px;
 }
